@@ -1,21 +1,41 @@
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 
-const ThemeContext = createContext(undefined);
+export default function App() {
+  const [giftCard, setGiftCard] = useState(
+    {
+        firstName: "Jennifer",
+        lastName: "Smith",
+        text: "Free dinner for 4 guests",
+        valid: true,
+        instructions: "To use your coupon, click the button below.",
+    }
+  );
 
-export const ThemeProvider = ({ children }) => {
- const [theme, setTheme] = useState("light");
+  function spendGiftCard() {
 
- return (
-   <ThemeContext.Provider
-     value={{
-       theme,
-       toggleTheme: () => setTheme(theme === "light" ? "dark" : "light"),
-     }}
-   >
-     {children}
-   </ThemeContext.Provider>
- );
-};
+  }
 
-
-export const useTheme = () => useContext(ThemeContext);
+  return (
+    <div style={{padding: '40px'}}>
+      <h1>
+        Gift Card Page
+      </h1>
+      <h2>
+        Customer: {giftCard.firstName} {giftCard.lastName}
+      </h2>
+      <h3>
+        {giftCard.text}
+      </h3>
+      <p>
+        {giftCard.instructions}
+      </p>
+      {
+        giftCard.valid && (
+          <button onClick={spendGiftCard}>
+            Spend Gift Card
+          </button>
+        )
+      }
+    </div>
+  );
+}
