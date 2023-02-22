@@ -13,7 +13,7 @@ export default function App() {
       setDay("Friday")
     } else if (day === "Friday") {
       setDay("Monday")
-    }
+    };;
   }
   return (
     <div style={{padding: "40px"}}>
