@@ -1,67 +1,14 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-
-const MousePosition = ({ render }) => {
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
-    
-  });
-
-  useEffect(() => {
-    const handleMousePositionChange = (e) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      })
-    };
-
-    window.addEventListener("mousemove", handleMousePositionChange);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMousePositionChange);
-    };
-  }, []);
-
-  
-  return render({ mousePosition });
-};
-
-const PanelMouseLogger = ({mousePosition}) => {
-  return (
-    <div className="BasicTracker">
-      <p>Mouse position:</p>
-      <MousePosition
-       render={({ mousePosition }) => (
-      <div className="Row">
-        <span>x: {mousePosition.x}</span>
-        <span>y: {mousePosition.y}</span>
-      </div>
-     )}
-     />
-   </div>
-  );
-};
-
-const PointMouseLogger = ({mousePosition}) => {
- 
-  return (
-    <MousePosition
-    render={({ mousePosition }) => (
-    <p>
-      ({mousePosition.x}, {mousePosition.y})
-    </p>
-    )}
-    />
-  )
-};
+import FeedbackForm from "./FeedbackForm";
 
 function App() {
+  const handleSubmit = () => {
+    console.log("Form submitted!");
+  };
+
   return (
     <div className="App">
-      <header className="Header">Big lemon 🍕</header>
-      <PanelMouseLogger />
-      <PointMouseLogger />
+      <FeedbackForm onSubmit={handleSubmit} />
     </div>
   );
 }
